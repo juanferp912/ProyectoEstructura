@@ -1,17 +1,72 @@
-import java.util.Comparator;
-public class Entrega{
+public class Entrega {
     private String nombre;
     private String comentarios;
     private double nota;
     private String fechaEntrega;
+    private String estado;
 
-    public Entrega(String nombre, String comentarios, double nota) {
+    public Entrega(String nombre, String comentarios, double nota, String fechaEntrega) {
         this.nombre = nombre;
         this.comentarios = comentarios;
         this.nota = nota;
+        this.fechaEntrega = fechaEntrega;
+        this.estado = "pendiente";
     }
 
-    public double getNota() { return nota;}
-    public String getNombre() {return nombre;}
-    public String getComentarios() { return comentarios;}
+    // Getters
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getComentarios() {
+        return comentarios;
+    }
+
+    public double getNota() {
+        return nota;
+    }
+
+    public String getFechaEntrega() {
+        return fechaEntrega;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    // Setters
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setComentarios(String comentarios) {
+        this.comentarios = comentarios;
+    }
+
+    public void setNota(double nota) {
+        this.nota = nota;
+    }
+
+    public void setFechaEntrega(String fechaEntrega) {
+        this.fechaEntrega = fechaEntrega;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    // Operaciones TDA
+    public void calificar(double nota, String comentarios) {
+        this.nota = nota;
+        this.comentarios = comentarios;
+        this.estado = "calificado";
+    }
+
+    public boolean estaCalificada() {
+        return estado.equals("calificado");
+    }
+
+    public void marcarComoEntregado() {
+        this.estado = "entregado";
+    }
 }

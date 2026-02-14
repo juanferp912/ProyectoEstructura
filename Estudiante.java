@@ -1,15 +1,13 @@
 public class Estudiante {
     private String nombre;
     private String codigo;
-    private double promedio;
     private String correo;
     private ListaCompuesta<Entrega> entregas;
     private BoletinCalificaciones boletin;
 
-    public Estudiante(String nombre, String codigo, double promedio, String correo) {
+    public Estudiante(String nombre, String codigo, String correo) {
         this.nombre = nombre;
         this.codigo = codigo;
-        this.promedio = promedio;
         this.correo = correo;
         this.entregas = new ListaCompuesta<>();
     }
@@ -20,10 +18,6 @@ public class Estudiante {
 
     public String getCodigo() {
         return codigo;
-    }
-
-    public double getPromedio() {
-        return promedio;
     }
 
     public String getCorreo() {
@@ -46,16 +40,8 @@ public class Estudiante {
         this.codigo = codigo;
     }
 
-    public void setPromedio(double promedio) {
-        this.promedio = promedio;
-    }
-
     public void setCorreo(String correo) {
         this.correo = correo;
-    }
-
-    public void asignarBoletin(BoletinCalificaciones boletin) {
-        this.boletin = boletin;
     }
 
     public void agregarEntrega(Entrega entrega) {
@@ -75,9 +61,5 @@ public class Estudiante {
 
     public int contarEntregas() {
         return entregas.tamaño();
-    }
-
-    public void actualizarPromedio(double nuevoPromedio) {
-        this.promedio = nuevoPromedio;
     }
 }

@@ -9,11 +9,10 @@ public class BoletinCalificaciones {
         this.estudiante = estudiante;
         this.periodo = periodo;
         this.promedio = 0;
-        this.estado = "en_proceso";
+        this.estado = "enProceso";
         this.actividades = new ListaCompuesta<>();
     }
 
-    // Getters
     public Estudiante getEstudiante() {
         return estudiante;
     }
@@ -34,7 +33,6 @@ public class BoletinCalificaciones {
         return actividades;
     }
 
-    // Setters
     public void setEstudiante(Estudiante estudiante) {
         this.estudiante = estudiante;
     }
@@ -47,7 +45,6 @@ public class BoletinCalificaciones {
         this.estado = estado;
     }
 
-    // Operaciones TDA
     public void agregarActividad(Actividad actividad) {
         actividades.agregar(actividad);
     }

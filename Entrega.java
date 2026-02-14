@@ -1,11 +1,11 @@
 public class Entrega {
     private String nombre;
     private String comentarios;
-    private double nota;
+    private Fraccion nota;
     private String fechaEntrega;
     private String estado;
 
-    public Entrega(String nombre, String comentarios, double nota, String fechaEntrega) {
+    public Entrega(String nombre, String comentarios, Fraccion nota, String fechaEntrega) {
         this.nombre = nombre;
         this.comentarios = comentarios;
         this.nota = nota;
@@ -13,7 +13,6 @@ public class Entrega {
         this.estado = "pendiente";
     }
 
-    // Getters
     public String getNombre() {
         return nombre;
     }
@@ -22,7 +21,7 @@ public class Entrega {
         return comentarios;
     }
 
-    public double getNota() {
+    public Fraccion getNota() {
         return nota;
     }
 
@@ -42,7 +41,7 @@ public class Entrega {
         this.comentarios = comentarios;
     }
 
-    public void setNota(double nota) {
+    public void setNota(Fraccion nota) {
         this.nota = nota;
     }
 

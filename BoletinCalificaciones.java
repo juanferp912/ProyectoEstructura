@@ -1,6 +1,6 @@
 public class BoletinCalificaciones {
     private Estudiante estudiante;
-    private double promedio;
+    private Fraccion promedio;
     private String periodo;
     private String estado;
     private ListaCompuesta<Actividad> actividades;
@@ -8,7 +8,7 @@ public class BoletinCalificaciones {
     public BoletinCalificaciones(Estudiante estudiante, String periodo) {
         this.estudiante = estudiante;
         this.periodo = periodo;
-        this.promedio = 0;
+        this.promedio = new Fraccion(0, 1);
         this.estado = "enProceso";
         this.actividades = new ListaCompuesta<>();
     }
@@ -17,7 +17,7 @@ public class BoletinCalificaciones {
         return estudiante;
     }
 
-    public double getPromedio() {
+    public Fraccion getPromedio() {
         return promedio;
     }
 

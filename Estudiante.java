@@ -48,17 +48,6 @@ public class Estudiante {
         entregas.agregar(entrega);
     }
 
-    public double obtenerPromedioEntregas() {
-        if (entregas.estaVacia()) {
-            return 0;
-        }
-        double sumaNotas = 0;
-        for (int i = 0; i < entregas.tamaño(); i++) {
-            sumaNotas += entregas.obtener(i).getNota();
-        }
-        return sumaNotas / entregas.tamaño();
-    }
-
     public int contarEntregas() {
         return entregas.tamaño();
     }

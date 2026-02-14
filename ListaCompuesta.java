@@ -22,24 +22,34 @@ public class ListaCompuesta<T> {
         if (cabeza == null) {
             cabeza = nuevoNodo;
         } else {
-            Nodo<T> actual = cabeza;
-            while (actual.siguiente != null) {
-                actual = actual.siguiente;
-            }
-            actual.siguiente = nuevoNodo;
+            agregarRecursivo(cabeza, nuevoNodo);
         }
         tamaño++;
     }
 
+    private void agregarRecursivo(Nodo<T> actual, Nodo<T> nuevoNodo) {
+        if (actual.siguiente == null) {
+            actual.siguiente = nuevoNodo;
+        } else {
+            agregarRecursivo(actual.siguiente, nuevoNodo);
+        }
+    }
+
     public T obtener(int indice) {
-        if (indice < 0 || indice >= tamaño) {
-            throw new IndexOutOfBoundsException("Índice fuera de rango");
+        if (indice < 0 || indice >= tamaño || cabeza == null) {
+            return null;
         }
-        Nodo<T> actual = cabeza;
-        for (int i = 0; i < indice; i++) {
-            actual = actual.siguiente;
+        return obtenerRecursivo(cabeza, indice);
+    }
+
+    private T obtenerRecursivo(Nodo<T> actual, int indice) {
+        if (indice == 0) {
+            return actual.dato;
         }
-        return actual.dato;
+        if (actual.siguiente == null) {
+            return null;
+        }
+        return obtenerRecursivo(actual.siguiente, indice - 1);
     }
 
     public int tamaño() {

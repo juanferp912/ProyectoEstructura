@@ -34,7 +34,6 @@ public class Entrega {
         return estado;
     }
 
-    // Setters
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }

@@ -54,19 +54,4 @@ public class Entrega {
     public void setEstado(String estado) {
         this.estado = estado;
     }
-
-    // Operaciones TDA
-    public void calificar(double nota, String comentarios) {
-        this.nota = nota;
-        this.comentarios = comentarios;
-        this.estado = "calificado";
-    }
-
-    public boolean estaCalificada() {
-        return estado.equals("calificado");
-    }
-
-    public void marcarComoEntregado() {
-        this.estado = "entregado";
-    }
 }

@@ -21,6 +21,11 @@ public class Main {
         mostrarCalculos(curso);
         System.out.println();
         
+        // ejecutar cálculos
+        System.out.println("========== EJECUTANDO CÁLCULOS ==========");
+        ejecutarTodosLosCalculos(curso);
+        System.out.println();
+        
         // actividades vencidas
         System.out.println("========== CONSULTA 1: ACTIVIDADES VENCIDAS ==========");
         System.out.println("Fecha actual: 2024-02-13");
@@ -154,4 +159,25 @@ public class Main {
             }
         }
     }
+    
+    private static void ejecutarTodosLosCalculos(Curso curso) {
+        for (int i = 0; i < curso.getCalculos().tamaño(); i++) {
+            Calculo calc = curso.getCalculos().obtener(i);
+            if (calc != null) {
+                System.out.println("\nCálculo: " + calc.getNombre() + " (" + calc.getTipo() + ")");
+                
+                for (int j = 0; j < curso.getEstudiantes().tamaño(); j++) {
+                    Estudiante est = curso.getEstudiantes().obtener(j);
+                    if (est != null) {
+                        Fraccion resultado = EjecutorCalculos.ejecutarCalculo(calc, est);
+                        if (resultado != null) {
+                            System.out.println("  " + est.getNombre() + ": " + resultado.toString() + 
+                                             " (" + String.format("%.2f", resultado.aDecimal()) + ")");
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
+

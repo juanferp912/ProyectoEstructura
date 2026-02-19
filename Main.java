@@ -53,6 +53,11 @@ public class Main {
         mostrarCalculosList(calculosIncompletos);
         System.out.println();
         
+        // generar reporte
+        System.out.println("========== GENERANDO REPORTE ==========");
+        generarReporte(curso);
+        System.out.println();
+        
         System.out.println("========== FIN DEL PROGRAMA ==========");
     }
     
@@ -230,5 +235,27 @@ public class Main {
                 System.out.println("  - " + calc.getNombre() + " (" + calc.getTipo() + ")");
             }
         }
+    }
+    
+    private static void generarReporte(Curso curso) {
+        Reporte reporte = new Reporte(curso);
+        
+        // agregar primeras 2 actividades al reporte
+        for (int i = 0; i < 2 && i < curso.getActividades().tamaño(); i++) {
+            Actividad act = curso.getActividades().obtener(i);
+            if (act != null) {
+                reporte.agregarActividad(act);
+            }
+        }
+        
+        // agregar primer cálculo al reporte
+        if (curso.getCalculos().tamaño() > 0) {
+            Calculo calc = curso.getCalculos().obtener(0);
+            if (calc != null) {
+                reporte.agregarCalculo(calc);
+            }
+        }
+        
+        reporte.generarReporte();
     }
 }

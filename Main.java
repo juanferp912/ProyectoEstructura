@@ -33,6 +33,11 @@ public class Main {
         mostrarEstudiantesConNotaRepetida(curso, estudiantesConNotaRepetida);
         System.out.println();
         
+        // procesar entregas en orden FIFO
+        System.out.println("========== CONSULTA 3: PROCESAR ENTREGAS EN ORDEN FIFO ==========");
+        procesarEntregasEnCola(curso);
+        System.out.println();
+        
         System.out.println("========== FIN DEL PROGRAMA ==========");
     }
     
@@ -98,4 +103,29 @@ public class Main {
         
         mostrarEntregasRecursivo(entregas, indice + 1);
     }
-}
+    
+    private static void procesarEntregasEnCola(Curso curso) {
+        Cola<Entrega> colaEntregas = new Cola<>();
+        
+        // llenar la cola con todas las entregas
+        for (int i = 0; i < curso.getEstudiantes().tamaño(); i++) {
+            Estudiante est = curso.getEstudiantes().obtener(i);
+            if (est != null) {
+                for (int j = 0; j < est.getEntregas().tamaño(); j++) {
+                    Entrega ent = est.getEntregas().obtener(j);
+                    if (ent != null) {
+                        colaEntregas.encolar(ent);
+                    }
+                }
+            }
+        }
+        
+        // procesar entregas en orden FIFO
+        System.out.println("Procesando " + colaEntregas.tamaño() + " entregas en orden FIFO:");
+        while (!colaEntregas.estaVacia()) {
+            Entrega ent = colaEntregas.desencolar();
+            if (ent != null) {
+                System.out.println("  Procesando: " + ent.getNombre() + " - Nota: " + ent.getNota().toString());
+            }
+        }
+    }

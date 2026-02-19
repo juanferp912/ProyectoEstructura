@@ -12,7 +12,11 @@ public class Fraccion implements Comparable<Fraccion> {
     }
 
     private void simplificar() {
-        int mcd = calcularMCD(Math.abs(numerador), Math.abs(denominador));
+        int a = numerador;
+        int b = denominador;
+        if (a < 0) a = -a;
+        if (b < 0) b = -b;
+        int mcd = calcularMCD(a, b);
         numerador = numerador / mcd;
         denominador = denominador / mcd;
         if (denominador < 0) {
@@ -53,7 +57,7 @@ public class Fraccion implements Comparable<Fraccion> {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj == null || !(obj instanceof Fraccion)) {
+        if (obj == null) {
             return false;
         }
         Fraccion otra = (Fraccion) obj;

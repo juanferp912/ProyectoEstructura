@@ -29,21 +29,28 @@ public class Main {
         // actividades vencidas
         System.out.println("========== CONSULTA 1: ACTIVIDADES VENCIDAS ==========");
         System.out.println("Fecha actual: 2024-02-13");
-        ListaCompuesta<Actividad> actividadesVencidas = ConsultasCurso.obtenerActividadesVencidas(curso, "2024-02-13");
-        
+        ListaCompuesta<Actividad> actividadesVencidas = ConsultasAvanzadas.obtenerActividadesVencidas(curso, "2024-02-13");
         mostrarActividadesVencidas(actividadesVencidas);
         System.out.println();
         
-        // estudiantes con misma nota en diferentes actividades
-        System.out.println("========== CONSULTA 2: ESTUDIANTES CON NOTA REPETIDA ==========");
-        ListaCompuesta<Estudiante> estudiantesConNotaRepetida = ConsultasCurso.obtenerEstudiantesConNotaRepetida(curso);
-        
-        mostrarEstudiantesConNotaRepetida(curso, estudiantesConNotaRepetida);
+        System.out.println("========== CONSULTA 2: ACTIVIDADES CON ENTREGAS INCOMPLETAS ==========");
+        ListaCompuesta<Actividad> actividadesIncompletas = ConsultasAvanzadas.obtenerActividadesConEntregasIncompletas(curso);
+        mostrarActividadesIncompletas(actividadesIncompletas);
         System.out.println();
         
-        // procesar entregas en orden FIFO
-        System.out.println("========== CONSULTA 3: PROCESAR ENTREGAS EN ORDEN FIFO ==========");
-        procesarEntregasEnCola(curso);
+        System.out.println("========== CONSULTA 3: ESTUDIANTES CON ENTREGAS ALTAS ==========");
+        ListaCompuesta<Estudiante> estudiantesEntregasAltas = ConsultasAvanzadas.obtenerEstudiantesConEntregasAltas(curso, 50.0);
+        mostrarEstudiantes(estudiantesEntregasAltas);
+        System.out.println();
+        
+        System.out.println("========== CONSULTA 4: ESTUDIANTES CON NOTAS REPETIDAS ==========");
+        ListaCompuesta<Estudiante> estudiantesNotasRepetidas = ConsultasAvanzadas.obtenerEstudiantesConNotasRepetidas(curso);
+        mostrarEstudiantes(estudiantesNotasRepetidas);
+        System.out.println();
+        
+        System.out.println("========== CONSULTA 5: CÁLCULOS INCOMPLETOS ==========");
+        ListaCompuesta<Calculo> calculosIncompletos = ConsultasAvanzadas.obtenerCalculosIncompletos(curso);
+        mostrarCalculosList(calculosIncompletos);
         System.out.println();
         
         System.out.println("========== FIN DEL PROGRAMA ==========");
@@ -179,5 +186,49 @@ public class Main {
             }
         }
     }
+    
+    private static void mostrarActividadesIncompletas(ListaCompuesta<Actividad> actividades) {
+        if (actividades.estaVacia()) {
+            System.out.println("No hay actividades con entregas incompletas");
+            return;
+        }
+        
+        System.out.println("Actividades con entregas incompletas:");
+        for (int i = 0; i < actividades.tamaño(); i++) {
+            Actividad act = actividades.obtener(i);
+            if (act != null) {
+                System.out.println("  - " + act.getNombre());
+            }
+        }
+    }
+    
+    private static void mostrarEstudiantes(ListaCompuesta<Estudiante> estudiantes) {
+        if (estudiantes.estaVacia()) {
+            System.out.println("No hay estudiantes que cumplan el criterio");
+            return;
+        }
+        
+        System.out.println("Estudiantes encontrados:");
+        for (int i = 0; i < estudiantes.tamaño(); i++) {
+            Estudiante est = estudiantes.obtener(i);
+            if (est != null) {
+                System.out.println("  - " + est.getNombre() + " (" + est.getCodigo() + ")");
+            }
+        }
+    }
+    
+    private static void mostrarCalculosList(ListaCompuesta<Calculo> calculos) {
+        if (calculos.estaVacia()) {
+            System.out.println("No hay cálculos incompletos");
+            return;
+        }
+        
+        System.out.println("Cálculos incompletos:");
+        for (int i = 0; i < calculos.tamaño(); i++) {
+            Calculo calc = calculos.obtener(i);
+            if (calc != null) {
+                System.out.println("  - " + calc.getNombre() + " (" + calc.getTipo() + ")");
+            }
+        }
+    }
 }
-

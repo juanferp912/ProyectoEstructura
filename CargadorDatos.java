@@ -6,12 +6,13 @@ public class CargadorDatos {
 
     public static Curso cargarCurso(String nombreCurso, String codigoCurso, double notaMinima, 
                                      String profesor, int creditos, String rutaEstudiantes, 
-                                     String rutaActividades, String rutaEntregas) {
+                                     String rutaActividades, String rutaEntregas, String rutaCalculos) {
         Curso curso = new Curso(nombreCurso, codigoCurso, notaMinima, profesor, creditos);
         
         cargarEstudiantes(curso, rutaEstudiantes);
         cargarActividades(curso, rutaActividades);
         cargarEntregas(curso, rutaEntregas);
+        cargarCalculos(curso, rutaCalculos);
         
         return curso;
     }
@@ -104,6 +105,16 @@ public class CargadorDatos {
             if (act != null && act.getNombre().equals(nombreActividad)) {
                 act.getEntregas().agregar(entrega);
                 return;
+            }
+        }
+    }
+
+    private static void cargarCalculos(Curso curso, String ruta) {
+        ListaCompuesta<Calculo> calculos = CargadorCalculos.cargarCalculos(ruta);
+        for (int i = 0; i < calculos.tamaño(); i++) {
+            Calculo calc = calculos.obtener(i);
+            if (calc != null) {
+                curso.getCalculos().agregar(calc);
             }
         }
     }

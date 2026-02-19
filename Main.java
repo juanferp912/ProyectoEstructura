@@ -10,12 +10,15 @@ public class Main {
             4,
             "estudiantes.csv",
             "actividades.csv",
-            "entregas.csv"
+            "entregas.csv",
+            "calculos.csv"
         );
         
         System.out.println("Curso cargado: " + curso.getNombre());
         System.out.println("Estudiantes: " + curso.getEstudiantes().tamaño());
         System.out.println("Actividades: " + curso.getActividades().tamaño());
+        System.out.println("Cálculos: " + curso.getCalculos().tamaño());
+        mostrarCalculos(curso);
         System.out.println();
         
         // actividades vencidas
@@ -129,3 +132,26 @@ public class Main {
             }
         }
     }
+    
+    private static void mostrarCalculos(Curso curso) {
+        if (curso.getCalculos().estaVacia()) {
+            System.out.println("No hay cálculos cargados");
+            return;
+        }
+        
+        System.out.println("Cálculos disponibles:");
+        for (int i = 0; i < curso.getCalculos().tamaño(); i++) {
+            Calculo calc = curso.getCalculos().obtener(i);
+            if (calc != null) {
+                System.out.println("  - " + calc.getNombre() + " (Tipo: " + calc.getTipo() + ")");
+                System.out.println("    Actividades: ");
+                for (int j = 0; j < calc.getActividadesNombres().tamaño(); j++) {
+                    String act = calc.getActividadesNombres().obtener(j);
+                    if (act != null) {
+                        System.out.println("      * " + act);
+                    }
+                }
+            }
+        }
+    }
+}

@@ -6,6 +6,7 @@ public class Curso {
     private int creditos;
     private ListaCompuesta<Estudiante> estudiantes;
     private ListaCompuesta<Actividad> actividades;
+    private ListaCompuesta<Calculo> calculos;
 
     public Curso(String nombre, String codigo, double notaMinima, String profesor, int creditos) {
         this.nombre = nombre;
@@ -15,6 +16,7 @@ public class Curso {
         this.creditos = creditos;
         this.estudiantes = new ListaCompuesta<>();
         this.actividades = new ListaCompuesta<>();
+        this.calculos = new ListaCompuesta<>();
     }
 
     public String getNombre() {
@@ -45,6 +47,9 @@ public class Curso {
         return actividades;
     }
 
+    public ListaCompuesta<Calculo> getCalculos() {
+        return calculos;
+    }
 
     public void setNombre(String nombre) {
         this.nombre = nombre;

@@ -54,24 +54,6 @@ public class ListaCompuesta<T> {
         return obtenerRecursivo(actual.siguiente, indice - 1);
     }
 
-    public int buscar(T elemento) {
-        return buscarRecursivo(cabeza, elemento, 0);
-    }
-
-    private int buscarRecursivo(Nodo<T> actual, T elemento, int indice) {
-        if (actual == null) {
-            return -1;
-        }
-        if (actual.dato.equals(elemento)) {
-            return indice;
-        }
-        return buscarRecursivo(actual.siguiente, elemento, indice + 1);
-    }
-
-    public boolean existe(T elemento) {
-        return buscar(elemento) != -1;
-    }
-
     public T obtenerPrimero() {
         if (cabeza == null) {
             return null;

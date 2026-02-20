@@ -156,13 +156,8 @@ public class ListaCompuesta<T> {
     // UNIÓN: Retorna una lista con todos los elementos de dos listas sin repetidos
     public ListaCompuesta<T> union(ListaCompuesta<T> otraLista) {
         ListaCompuesta<T> resultado = new ListaCompuesta<>();
-        
-        // Agregar todos los elementos de la lista actual
         agregarTodosRecursivo(this.cabeza, resultado);
-        
-        // Agregar elementos de la otra lista solo si no existen en la actual
         agregarSiNoExisteRecursivo(otraLista.cabeza, resultado);
-        
         return resultado;
     }
 

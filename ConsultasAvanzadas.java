@@ -1,6 +1,6 @@
 public class ConsultasAvanzadas {
 
-    // ACTIVIDADES - su fecha de entrega límite ya feneció
+    // su fecha de entrega límite ya feneció
     public static ListaCompuesta<Actividad> obtenerActividadesVencidas(Curso curso, String fechaActual) {
         ListaCompuesta<Actividad> resultado = new ListaCompuesta<>();
         for (int i = 0; i < curso.getActividades().tamaño(); i++) {
@@ -12,7 +12,7 @@ public class ConsultasAvanzadas {
         return resultado;
     }
 
-    // ACTIVIDADES - las entregas estén incompletas
+    // las entregas estén incompletas
     public static ListaCompuesta<Actividad> obtenerActividadesConEntregasIncompletas(Curso curso) {
         ListaCompuesta<Actividad> resultado = new ListaCompuesta<>();
         for (int i = 0; i < curso.getActividades().tamaño(); i++) {
@@ -24,7 +24,7 @@ public class ConsultasAvanzadas {
         return resultado;
     }
 
-    // ACTIVIDADES - las calificaciones de las entregas son menores a un valor dado
+    // las calificaciones de las entregas son menores a un valor dado
     public static ListaCompuesta<Actividad> obtenerActividadesConCalificacionesBajas(Curso curso, double valorMinimo) {
         ListaCompuesta<Actividad> resultado = new ListaCompuesta<>();
         for (int i = 0; i < curso.getActividades().tamaño(); i++) {
@@ -36,7 +36,7 @@ public class ConsultasAvanzadas {
         return resultado;
     }
 
-    // ENTREGAS - Enviadas luego de una cierta fecha y que aún no han recibido calificación
+    // Enviadas luego de una cierta fecha y que aún no han recibido calificación
     public static ListaCompuesta<Entrega> obtenerEntregasSinCalificarAntiguedad(Curso curso, String fechaLimite) {
         ListaCompuesta<Entrega> resultado = new ListaCompuesta<>();
         for (int i = 0; i < curso.getEstudiantes().tamaño(); i++) {
@@ -54,7 +54,7 @@ public class ConsultasAvanzadas {
         return resultado;
     }
 
-    // ESTUDIANTES - su porcentaje de entregas a actividades es mayor a un porcentaje dado
+    // su porcentaje de entregas a actividades es mayor a un porcentaje dado
     public static ListaCompuesta<Estudiante> obtenerEstudiantesConEntregasAltas(Curso curso, double porcentajeMinimo) {
         ListaCompuesta<Estudiante> resultado = new ListaCompuesta<>();
         for (int i = 0; i < curso.getEstudiantes().tamaño(); i++) {
@@ -69,7 +69,7 @@ public class ConsultasAvanzadas {
         return resultado;
     }
 
-    // ESTUDIANTES - no han respondido aún actividades enviadas y ya expiradas
+    //  no han respondido aún actividades enviadas y ya expiradas
     public static ListaCompuesta<Estudiante> obtenerEstudiantesConActividadesPendientes(Curso curso, String fechaActual) {
         ListaCompuesta<Estudiante> resultado = new ListaCompuesta<>();
         for (int i = 0; i < curso.getEstudiantes().tamaño(); i++) {
@@ -81,7 +81,7 @@ public class ConsultasAvanzadas {
         return resultado;
     }
 
-    // ESTUDIANTES - tienen misma nota en dos actividades diferentes
+    //tienen misma nota en dos actividades diferentes
     public static ListaCompuesta<Estudiante> obtenerEstudiantesConNotasRepetidas(Curso curso) {
         ListaCompuesta<Estudiante> resultado = new ListaCompuesta<>();
         for (int i = 0; i < curso.getEstudiantes().tamaño(); i++) {
@@ -93,7 +93,7 @@ public class ConsultasAvanzadas {
         return resultado;
     }
 
-    // CÁLCULOS - no se pueden ejecutar porque faltan calificaciones
+    // no se pueden ejecutar porque faltan calificaciones
     public static ListaCompuesta<Calculo> obtenerCalculosIncompletos(Curso curso) {
         ListaCompuesta<Calculo> resultado = new ListaCompuesta<>();
         for (int i = 0; i < curso.getCalculos().tamaño(); i++) {
@@ -105,7 +105,7 @@ public class ConsultasAvanzadas {
         return resultado;
     }
 
-    // CÁLCULOS - involucra una actividad dada
+    // involucra una actividad dada
     public static ListaCompuesta<Calculo> obtenerCalculosPorActividad(Curso curso, String nombreActividad) {
         ListaCompuesta<Calculo> resultado = new ListaCompuesta<>();
         for (int i = 0; i < curso.getCalculos().tamaño(); i++) {

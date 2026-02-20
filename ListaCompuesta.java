@@ -194,13 +194,10 @@ public class ListaCompuesta<T> {
         return existeElemento(nodo.siguiente, elemento);
     }
 
-    // INTERSECCIÓN: Retorna una lista con los elementos que están en ambas listas
+    // retorna una lista con los elementos que están en ambas listas
     public ListaCompuesta<T> interseccion(ListaCompuesta<T> otraLista) {
         ListaCompuesta<T> resultado = new ListaCompuesta<>();
-        
-        // Agregar solo los elementos que existen en ambas listas
         agregarSoloComunesRecursivo(this.cabeza, otraLista, resultado);
-        
         return resultado;
     }
 
@@ -208,13 +205,10 @@ public class ListaCompuesta<T> {
         if (actual == null) {
             return;
         }
-        
-        // Verificar si el elemento existe en la otra lista y no está ya en el resultado
         if (existeElemento(otraLista.cabeza, actual.dato) && 
             !existeElemento(resultado.cabeza, actual.dato)) {
             resultado.agregar(actual.dato);
         }
-        
         agregarSoloComunesRecursivo(actual.siguiente, otraLista, resultado);
     }
 

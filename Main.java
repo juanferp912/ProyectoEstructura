@@ -58,7 +58,124 @@ public class Main {
         generarReporte(curso);
         System.out.println();
         
+        // Operaciones con ListaCompuesta
+        mostrarOperaciones();
+        
         System.out.println("========== FIN DEL PROGRAMA ==========");
+    }
+    
+    private static void mostrarOperaciones() {
+        System.out.println("========== OPERACIONES CON LISTACOMPUESTA ==========");
+        
+        // ListaCompuesta
+        System.out.println("\n ListaCompuesta");
+        ListaCompuesta<Entrega> lista1 = new ListaCompuesta<>();
+        ListaCompuesta<Entrega> lista2 = new ListaCompuesta<>();
+        System.out.println("  Se crearon dos ListaCompuesta<Entrega> vacías");
+        System.out.println("  - Lista 1 tamaño: " + lista1.tamaño());
+        System.out.println("  - Lista 2 tamaño: " + lista2.tamaño());
+        
+        // agregar elementos a lista principal
+        System.out.println("\n Agregar elementos a lista principal");
+        Entrega e1 = new Entrega("Entrega Juan", "Completada", new Fraccion(8, 10), "2024-02-14");
+        Entrega e2 = new Entrega("Entrega María", "Completada", new Fraccion(9, 10), "2024-02-15");
+        Entrega e3 = new Entrega("Entrega Pedro", "Pendiente", new Fraccion(0, 10), "2024-02-16");
+        Entrega e4 = new Entrega("Entrega Ana", "Completada", new Fraccion(10, 10), "2024-02-17");
+        
+        lista1.agregar(e1);
+        lista1.agregar(e2);
+        lista1.agregar(e3);
+        
+        lista2.agregar(e1);
+        lista2.agregar(e4);
+        
+        System.out.println("  - Lista 1: agregados 3 elementos (Juan, María, Pedro)");
+        System.out.println("    Tamaño: " + lista1.tamaño());
+        System.out.println("  - Lista 2: agregados 2 elementos (Juan, Ana)");
+        System.out.println("    Tamaño: " + lista2.tamaño());
+        
+        //agregar elementos a lista secundaria 
+        System.out.println("\n Agregar elementos a lista secundaria");
+        Actividad actDemo = new Actividad("Taller Demostrativo", "Demo para profesora", "2024-03-01", 10.0);
+        Entrega entDemo1 = new Entrega("Entrega estudiante 1", "Completa", new Fraccion(7, 10), "2024-02-28");
+        Entrega entDemo2 = new Entrega("Entrega estudiante 2", "Incompleta", new Fraccion(5, 10), "2024-02-28");
+        
+        actDemo.getEntregas().agregar(entDemo1);
+        actDemo.getEntregas().agregar(entDemo2);
+        
+        System.out.println("  - Actividad: " + actDemo.getNombre());
+        System.out.println("  - Entregas agregadas a actividad: " + actDemo.getEntregas().tamaño());
+        for (int i = 0; i < actDemo.getEntregas().tamaño(); i++) {
+            Entrega ent = actDemo.getEntregas().obtener(i);
+            if (ent != null) {
+                System.out.println("    * " + ent.getNombre() + " - Estado: " + ent.getEstado());
+            }
+        }
+        
+        // Filtrar por criterio en listas secundarias
+        System.out.println("\n Filtrar por criterio en listas secundarias");
+        ListaCompuesta<Actividad> actividadesConIncompletas = new ListaCompuesta<>();
+        actividadesConIncompletas.agregar(actDemo);
+        
+        System.out.println("  - Criterio: actividades con entregas incompletas");
+        System.out.println("  - Actividad: " + actDemo.getNombre());
+        int entregasIncompletas = 0;
+        for (int i = 0; i < actDemo.getEntregas().tamaño(); i++) {
+            Entrega ent = actDemo.getEntregas().obtener(i);
+            if (ent != null && ent.getEstado().equals("Incompleta")) {
+                entregasIncompletas++;
+            }
+        }
+        System.out.println("  - Entregas incompletas encontradas: " + entregasIncompletas);
+        
+        // filtrar por criterio en lista principal
+        System.out.println("\n✓ FASE 5: Filtrar por criterio en lista principal");
+        ListaCompuesta<Entrega> listaFiltrada = new ListaCompuesta<>();
+        System.out.println("  - Criterio: entregas con estado 'Completada'");
+        System.out.println("  - Lista 1 original: " + lista1.tamaño() + " elementos");
+        
+        for (int i = 0; i < lista1.tamaño(); i++) {
+            Entrega ent = lista1.obtener(i);
+            if (ent != null && ent.getEstado().equals("Completada")) {
+                listaFiltrada.agregar(ent);
+            }
+        }
+        System.out.println("  - Entregas con estado 'Completada': " + listaFiltrada.tamaño());
+        for (int i = 0; i < listaFiltrada.tamaño(); i++) {
+            Entrega ent = listaFiltrada.obtener(i);
+            if (ent != null) {
+                System.out.println("    * " + ent.getNombre());
+            }
+        }
+        
+        // Unión sin repetidos 
+        System.out.println("\n Unión de dos listas sin repetidos");
+        System.out.println("  - Lista 1: " + lista1.tamaño() + " elementos (Juan, María, Pedro)");
+        System.out.println("  - Lista 2: " + lista2.tamaño() + " elementos (Juan, Ana)");
+        
+        ListaCompuesta<Entrega> unionListas = lista1.union(lista2);
+        System.out.println("  - UNION (sin repetidos): " + unionListas.tamaño() + " elementos");
+        for (int i = 0; i < unionListas.tamaño(); i++) {
+            Entrega ent = unionListas.obtener(i);
+            if (ent != null) {
+                System.out.println("    * " + ent.getNombre());
+            }
+        }
+        System.out.println("  Nota: 'Juan' aparece solo una vez aunque estaba en ambas listas");
+        
+        // Intersección
+        System.out.println("\n intersección de dos listas");
+        System.out.println("  - Lista 1: Juan, María, Pedro");
+        System.out.println("  - Lista 2: Juan, Ana");
+        
+        ListaCompuesta<Entrega> interseccionListas = lista1.interseccion(lista2);
+        System.out.println("  - INTERSECCIÓN: " + interseccionListas.tamaño() + " elemento(s)");
+        for (int i = 0; i < interseccionListas.tamaño(); i++) {
+            Entrega ent = interseccionListas.obtener(i);
+            if (ent != null) {
+                System.out.println("    * " + ent.getNombre() + " (elemento común en ambas)");
+            }
+        }
     }
     
     private static void mostrarActividadesVencidas(ListaCompuesta<Actividad> actividades) {

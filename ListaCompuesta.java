@@ -153,6 +153,71 @@ public class ListaCompuesta<T> {
         return tamaño == 0;
     }
 
+    // UNIÓN: Retorna una lista con todos los elementos de dos listas sin repetidos
+    public ListaCompuesta<T> union(ListaCompuesta<T> otraLista) {
+        ListaCompuesta<T> resultado = new ListaCompuesta<>();
+        
+        // Agregar todos los elementos de la lista actual
+        agregarTodosRecursivo(this.cabeza, resultado);
+        
+        // Agregar elementos de la otra lista solo si no existen en la actual
+        agregarSiNoExisteRecursivo(otraLista.cabeza, resultado);
+        
+        return resultado;
+    }
+
+    private void agregarTodosRecursivo(Nodo<T> actual, ListaCompuesta<T> resultado) {
+        if (actual == null) {
+            return;
+        }
+        resultado.agregar(actual.dato);
+        agregarTodosRecursivo(actual.siguiente, resultado);
+    }
+
+    private void agregarSiNoExisteRecursivo(Nodo<T> actual, ListaCompuesta<T> resultado) {
+        if (actual == null) {
+            return;
+        }
+        if (!existeElemento(resultado.cabeza, actual.dato)) {
+            resultado.agregar(actual.dato);
+        }
+        agregarSiNoExisteRecursivo(actual.siguiente, resultado);
+    }
+
+    private boolean existeElemento(Nodo<T> nodo, T elemento) {
+        if (nodo == null) {
+            return false;
+        }
+        if (nodo.dato.equals(elemento)) {
+            return true;
+        }
+        return existeElemento(nodo.siguiente, elemento);
+    }
+
+    // INTERSECCIÓN: Retorna una lista con los elementos que están en ambas listas
+    public ListaCompuesta<T> interseccion(ListaCompuesta<T> otraLista) {
+        ListaCompuesta<T> resultado = new ListaCompuesta<>();
+        
+        // Agregar solo los elementos que existen en ambas listas
+        agregarSoloComunesRecursivo(this.cabeza, otraLista, resultado);
+        
+        return resultado;
+    }
+
+    private void agregarSoloComunesRecursivo(Nodo<T> actual, ListaCompuesta<T> otraLista, ListaCompuesta<T> resultado) {
+        if (actual == null) {
+            return;
+        }
+        
+        // Verificar si el elemento existe en la otra lista y no está ya en el resultado
+        if (existeElemento(otraLista.cabeza, actual.dato) && 
+            !existeElemento(resultado.cabeza, actual.dato)) {
+            resultado.agregar(actual.dato);
+        }
+        
+        agregarSoloComunesRecursivo(actual.siguiente, otraLista, resultado);
+    }
+
     public String mostrar() {
         if (cabeza == null) {
             return "[]";

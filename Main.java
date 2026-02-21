@@ -28,36 +28,36 @@ public class Main {
         System.out.println();
         
         // Consultas del semestre 1
-        System.out.println("========== CONSULTA 1: ACTIVIDADES VENCIDAS ==========");
+        System.out.println("========== ACTIVIDADES VENCIDAS ========");
         System.out.println("Fecha actual: 2024-02-13");
         ListaCompuesta<Actividad> actividadesVencidas = ConsultasAvanzadas.obtenerActividadesVencidas(cursoS1, "2024-02-13");
         mostrarActividadesVencidas(actividadesVencidas);
         System.out.println();
         
-        System.out.println("========== CONSULTA 2: ACTIVIDADES CON ENTREGAS INCOMPLETAS ==========");
+        System.out.println("====== ACTIVIDADES CON ENTREGAS INCOMPLETAS ======");
         ListaCompuesta<Actividad> actividadesIncompletas = ConsultasAvanzadas.obtenerActividadesConEntregasIncompletas(cursoS1);
         mostrarActividadesIncompletas(actividadesIncompletas);
         System.out.println("NOTA: Gustavo Mejia (CARP06) no entregó Proyecto");
         System.out.println("NOTA: Santino Gonzalez (CARP08) no entregó Examen1");
         System.out.println();
         
-        System.out.println("========== CONSULTA 3: ESTUDIANTES CON ENTREGAS ALTAS ==========");
+        System.out.println("======= ESTUDIANTES CON ENTREGAS ALTAS =======");
         ListaCompuesta<Estudiante> estudiantesEntregasAltas = ConsultasAvanzadas.obtenerEstudiantesConEntregasAltas(cursoS1, 50.0);
         mostrarEstudiantes(estudiantesEntregasAltas);
         System.out.println();
         
-        System.out.println("========== CONSULTA 4: ESTUDIANTES CON NOTAS REPETIDAS ==========");
+        System.out.println("========== ESTUDIANTES CON NOTAS REPETIDAS ==========");
         ListaCompuesta<Estudiante> estudiantesNotasRepetidas = ConsultasAvanzadas.obtenerEstudiantesConNotasRepetidas(cursoS1);
         mostrarEstudiantes(estudiantesNotasRepetidas);
         System.out.println();
         
-        System.out.println("========== CONSULTA 5: CÁLCULOS INCOMPLETOS ==========");
+        System.out.println("========== CÁLCULOS INCOMPLETOS ========");
         ListaCompuesta<Calculo> calculosIncompletos = ConsultasAvanzadas.obtenerCalculosIncompletos(cursoS1);
         mostrarCalculosList(calculosIncompletos);
         System.out.println();
         
         // Generar reporte del semestre 1
-        System.out.println("========== GENERANDO REPORTE ==========");
+        System.out.println("========= GENERANDO REPORTE ========");
         generarReporte(cursoS1);
         System.out.println();
         
@@ -83,21 +83,21 @@ public class Main {
         System.out.println("Estudiantes: " + cursoS2.getEstudiantes().tamaño());
         System.out.println();
         
-        System.out.println("========== EJECUTANDO CÁLCULOS SEMESTRE 2 ==========");
+        System.out.println("======== EJECUTANDO CÁLCULOS SEMESTRE 2 =========");
         ejecutarTodosLosCalculos(cursoS2);
         System.out.println();
         
         // Generar reporte del semestre 2
-        System.out.println("========== GENERANDO REPORTE SEMESTRE 2 ==========");
+        System.out.println("======== GENERANDO REPORTE SEMESTRE 2 ========");
         generarReporte(cursoS2);
         System.out.println();
         
         // Reporte combinado de ambos semestres
-        System.out.println("========== REPORTE COMBINADO - AMBOS SEMESTRES ==========");
+        System.out.println("========= REPORTE COMBINADO - AMBOS SEMESTRES =======");
         generarReporteCombinado(cursoS1, cursoS2);
         System.out.println();
-        
-        System.out.println("========== FIN DEL PROGRAMA ==========");
+    
+        System.out.println("========= FIN DEL PROGRAMA =======");
     }
     
     private static void generarReporteCombinado(Curso cursoS1, Curso cursoS2) {
@@ -147,7 +147,7 @@ public class Main {
     }
     
     private static void mostrarOperaciones(Curso curso) {
-        System.out.println("========== OPERACIONES CON LISTACOMPUESTA ==========");
+        System.out.println("====== OPERACIONES CON LISTACOMPUESTA ========");
         
         // Obtener entregas reales del curso
         System.out.println("\n ListaCompuesta con estudiantes reales del curso");

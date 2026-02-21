@@ -223,4 +223,22 @@ public class ListaCompuesta<T> {
         }
         return actual.dato.toString() + ", " + mostrarRecursivo(actual.siguiente);
     }
+
+    public void replace(int indice, T nuevoElemento) {
+        if (indice < 0 || indice >= tamaño || cabeza == null) {
+            return;
+        }
+        reemplazarRecursivo(cabeza, indice, nuevoElemento);
+    }
+
+    private void reemplazarRecursivo(Nodo<T> actual, int indice, T nuevoElemento) {
+        if (indice == 0) {
+            actual.dato = nuevoElemento;
+            return;
+        }
+        if (actual.siguiente == null) {
+            return;
+        }
+        reemplazarRecursivo(actual.siguiente, indice - 1, nuevoElemento);
+    }
 }

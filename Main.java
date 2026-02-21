@@ -357,17 +357,17 @@ public class Main {
     private static void generarReporte(Curso curso) {
         Reporte reporte = new Reporte(curso);
         
-        // agregar primeras 2 actividades al reporte
-        for (int i = 0; i < 2 && i < curso.getActividades().tamaño(); i++) {
+        // agregar todas las actividades al reporte
+        for (int i = 0; i < curso.getActividades().tamaño(); i++) {
             Actividad act = curso.getActividades().obtener(i);
             if (act != null) {
                 reporte.agregarActividad(act);
             }
         }
         
-        // agregar primer cálculo al reporte
-        if (curso.getCalculos().tamaño() > 0) {
-            Calculo calc = curso.getCalculos().obtener(0);
+        // agregar todos los cálculos al reporte
+        for (int i = 0; i < curso.getCalculos().tamaño(); i++) {
+            Calculo calc = curso.getCalculos().obtener(i);
             if (calc != null) {
                 reporte.agregarCalculo(calc);
             }

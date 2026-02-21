@@ -23,13 +23,13 @@ public class EjecutorCalculos {
             }
         }
         
-        // desapilar y sumar todas las notas
-        int suma = 0;
+        // desapilar y calcular promedio en decimal
+        double sumaDecimal = 0;
         int count = 0;
         while (!notas.estaVacia()) {
             Fraccion nota = notas.desapilar();
             if (nota != null) {
-                suma += nota.getNumerador();
+                sumaDecimal += nota.aDecimal();
                 count++;
             }
         }
@@ -38,7 +38,11 @@ public class EjecutorCalculos {
             return new Fraccion(0, 1);
         }
         
-        return new Fraccion(suma / count, 1);
+        double promedio = sumaDecimal / count;
+        // Convertir el promedio decimal a fracción (por ejemplo 8.5 = 17/2)
+        int numerador = (int) Math.round(promedio * 100);
+        int denominador = 100;
+        return new Fraccion(numerador, denominador);
     }
 
     private static Fraccion calcularSuma(Calculo calculo, Estudiante estudiante) {

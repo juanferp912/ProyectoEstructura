@@ -129,7 +129,7 @@ public class Main {
         System.out.println("  - Entregas incompletas encontradas: " + entregasIncompletas);
         
         // filtrar por criterio en lista principal
-        System.out.println("\n✓ FASE 5: Filtrar por criterio en lista principal");
+        System.out.println("\n Filtrar por criterio en lista principal");
         ListaCompuesta<Entrega> listaFiltrada = new ListaCompuesta<>();
         System.out.println("  - Criterio: entregas con estado 'Completada'");
         System.out.println("  - Lista 1 original: " + lista1.tamaño() + " elementos");

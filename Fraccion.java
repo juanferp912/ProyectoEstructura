@@ -11,6 +11,18 @@ public class Fraccion implements Comparable<Fraccion> {
         simplificar();
     }
 
+    // Constructor que permite crear fracciones sin simplificar
+    public Fraccion(int numerador, int denominador, boolean simplificar) {
+        if (denominador == 0) {
+            denominador = 1;
+        }
+        this.numerador = numerador;
+        this.denominador = denominador;
+        if (simplificar) {
+            simplificar();
+        }
+    }
+
     private void simplificar() {
         int a = numerador;
         int b = denominador;

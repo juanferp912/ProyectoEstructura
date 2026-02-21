@@ -23,13 +23,15 @@ public class EjecutorCalculos {
             }
         }
         
-        // desapilar y calcular promedio en decimal
-        double sumaDecimal = 0;
+        // desapilar y calcular promedio en escala 0-10
+        double sumaNotas = 0;
         int count = 0;
         while (!notas.estaVacia()) {
             Fraccion nota = notas.desapilar();
             if (nota != null) {
-                sumaDecimal += nota.aDecimal();
+                // convertir cada nota a escala 0-10
+                double notaSobre10 = nota.aDecimal() * 10;
+                sumaNotas += notaSobre10;
                 count++;
             }
         }
@@ -38,11 +40,10 @@ public class EjecutorCalculos {
             return new Fraccion(0, 1);
         }
         
-        double promedio = sumaDecimal / count;
-        // Convertir el promedio decimal a fracción (por ejemplo 8.5 = 17/2)
-        int numerador = (int) Math.round(promedio * 100);
-        int denominador = 100;
-        return new Fraccion(numerador, denominador);
+        double promedioSobre10 = sumaNotas / count;
+        // Convertir a fracción sobre 10 (sin simplificar)
+        int numerador = (int) Math.round(promedioSobre10 * 10);
+        return new Fraccion(numerador, 10, false);
     }
 
     private static Fraccion calcularSuma(Calculo calculo, Estudiante estudiante) {
@@ -59,16 +60,28 @@ public class EjecutorCalculos {
             }
         }
         
-        // desapilar y sumar todas las notas
-        int suma = 0;
+        // desapilar y sumar todas las notas normalizadas a escala 0-10
+        double sumaNotas = 0;
+        int count = 0;
         while (!notas.estaVacia()) {
             Fraccion nota = notas.desapilar();
             if (nota != null) {
-                suma += nota.getNumerador();
+                // convertir cada nota a escala 0-10
+                double notaSobre10 = nota.aDecimal() * 10;
+                sumaNotas += notaSobre10;
+                count++;
             }
         }
         
-        return new Fraccion(suma, 1);
+        if (count == 0) {
+            return new Fraccion(0, 1);
+        }
+        
+        // Normalizar a escala 0-10 dividiendo entre el número de actividades
+        double sumaSobre10 = sumaNotas / count;
+        // Convertir a fracción sobre 10 (sin simplificar)
+        int numerador = (int) Math.round(sumaSobre10 * 10);
+        return new Fraccion(numerador, 10, false);
     }
 
     private static Fraccion obtenerNotaEstudianteEnActividad(Estudiante estudiante, String nombreActividad) {

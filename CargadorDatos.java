@@ -76,7 +76,7 @@ public class CargadorDatos {
                     int denominador = Integer.parseInt(datos[3].trim());
                     String fechaEntrega = datos[4].trim();
                     
-                    Fraccion nota = new Fraccion(numerador, denominador);
+                    Fraccion nota = new Fraccion(numerador, denominador, false);
                     Entrega entrega = new Entrega(nombreActividad, "", nota, fechaEntrega);
                     
                     asignarEntregaAEstudiante(curso, codigoEstudiante, entrega);

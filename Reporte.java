@@ -87,8 +87,7 @@ public class Reporte {
             if (act != null) {
                 Fraccion nota = obtenerNotaEstudianteEnActividad(est, act);
                 if (nota != null) {
-                    System.out.println("      " + act.getNombre() + ": " + nota.toString() + 
-                                     " (" + String.format("%.2f", nota.aDecimal()) + ")");
+                    System.out.println("      " + act.getNombre() + ": " + nota.toString());
                 } else {
                     System.out.println("      " + act.getNombre() + ": Sin calificación");
                 }
@@ -102,8 +101,7 @@ public class Reporte {
             if (calc != null) {
                 Fraccion resultado = EjecutorCalculos.ejecutarCalculo(calc, est);
                 if (resultado != null) {
-                    System.out.println("      " + calc.getNombre() + ": " + resultado.toString() + 
-                                     " (" + String.format("%.2f", resultado.aDecimal()) + ")");
+                    System.out.println("      " + calc.getNombre() + ": " + resultado.toString());
                 }
             }
         }

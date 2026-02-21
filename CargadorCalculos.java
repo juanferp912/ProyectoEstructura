@@ -20,9 +20,20 @@ public class CargadorCalculos {
                     
                     Calculo calculo = new Calculo(nombre, tipo);
                     
-                    String[] actividades = actividadesStr.split("\\|");
-                    for (String actividad : actividades) {
-                        calculo.agregarActividad(actividad.trim());
+                    // Parsear actividades con pesos
+                    String[] actividadesConPeso = actividadesStr.split("\\|");
+                    for (String item : actividadesConPeso) {
+                        item = item.trim();
+                        if (item.contains(":")) {
+                            // Tiene peso
+                            String[] partes = item.split(":");
+                            String actividad = partes[0].trim();
+                            double peso = Double.parseDouble(partes[1].trim());
+                            calculo.agregarActividad(actividad, peso);
+                        } else {
+                            // Sin peso (promedio simple)
+                            calculo.agregarActividad(item);
+                        }
                     }
                     
                     calculos.agregar(calculo);

@@ -23,15 +23,13 @@ public class EjecutorCalculos {
             }
         }
         
-        // desapilar y calcular promedio en escala 0-10
+        //  suma de notas / cantidad de actividades
         double sumaNotas = 0;
         int count = 0;
         while (!notas.estaVacia()) {
             Fraccion nota = notas.desapilar();
             if (nota != null) {
-                // convertir cada nota a escala 0-10
-                double notaSobre10 = nota.aDecimal() * 10;
-                sumaNotas += notaSobre10;
+                sumaNotas += nota.aDecimal();  
                 count++;
             }
         }
@@ -40,13 +38,19 @@ public class EjecutorCalculos {
             return new Fraccion(0, 1);
         }
         
-        double promedioSobre10 = sumaNotas / count;
-        // Convertir a fracción sobre 10 (sin simplificar)
-        int numerador = (int) Math.round(promedioSobre10 * 10);
+        // Promedio: suma / cantidad, convertido a escala 0-10 y retornado como fracción
+        double promedioDp = sumaNotas / count;
+        int numerador = (int) Math.round(promedioDp * 10);
         return new Fraccion(numerador, 10, false);
     }
 
     private static Fraccion calcularSuma(Calculo calculo, Estudiante estudiante) {
+        // Si tiene peso es suma ponderada
+        if (calculo.getPesos().tamaño() > 0) {
+            return calcularSumaPonderada(calculo, estudiante);
+        }
+        
+        // Si no es promedio simple
         Pila<Fraccion> notas = new Pila<>();
         
         // apilar todas las notas del estudiante en las actividades del cálculo
@@ -60,15 +64,13 @@ public class EjecutorCalculos {
             }
         }
         
-        // desapilar y sumar todas las notas normalizadas a escala 0-10
+        // Calcular suma promediada como en un boletín real: suma de notas / cantidad de actividades
         double sumaNotas = 0;
         int count = 0;
         while (!notas.estaVacia()) {
             Fraccion nota = notas.desapilar();
             if (nota != null) {
-                // convertir cada nota a escala 0-10
-                double notaSobre10 = nota.aDecimal() * 10;
-                sumaNotas += notaSobre10;
+                sumaNotas += nota.aDecimal();  // Convertir a valor decimal
                 count++;
             }
         }
@@ -77,10 +79,30 @@ public class EjecutorCalculos {
             return new Fraccion(0, 1);
         }
         
-        // Normalizar a escala 0-10 dividiendo entre el número de actividades
-        double sumaSobre10 = sumaNotas / count;
-        // Convertir a fracción sobre 10 (sin simplificar)
-        int numerador = (int) Math.round(sumaSobre10 * 10);
+        // Suma: suma / cantidad, convertido a escala 0-10 y retornado como fracción
+        double sumaDp = sumaNotas / count;
+        int numerador = (int) Math.round(sumaDp * 10);
+        return new Fraccion(numerador, 10, false);
+    }
+
+    private static Fraccion calcularSumaPonderada(Calculo calculo, Estudiante estudiante) {
+        double sumaPonderada = 0;
+        
+        // Iterar sobre actividades y pesos
+        for (int i = 0; i < calculo.getActividadesNombres().tamaño(); i++) {
+            String nombreActividad = calculo.getActividadesNombres().obtener(i);
+            Double peso = calculo.getPesos().obtener(i);
+            
+            if (nombreActividad != null && peso != null) {
+                Fraccion nota = obtenerNotaEstudianteEnActividad(estudiante, nombreActividad);
+                if (nota != null) {
+                    sumaPonderada += nota.aDecimal() * peso;
+                }
+            }
+        }
+        
+        // Convertir a escala 0-10
+        int numerador = (int) Math.round(sumaPonderada * 10);
         return new Fraccion(numerador, 10, false);
     }
 

@@ -2,66 +2,148 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("========== CARGANDO DATOS ==========");
         
-        Curso curso = CargadorDatos.cargarCurso(
-            "Estructura de Datos",
+        // Cargar Semestre 1
+        Curso cursoS1 = CargadorDatos.cargarCurso(
+            "Estructura de Datos - Semestre 1",
             "CARP912",
             3.0,
             "Dr. Xavier Barriga",
             4,
-            "estudiantes.csv",
-            "actividades.csv",
-            "entregas.csv",
-            "calculos.csv"
+            "estudiantes_s1.csv",
+            "actividades_s1.csv",
+            "entregas_s1.csv",
+            "calculos_s1.csv"
         );
         
-        System.out.println("Curso cargado: " + curso.getNombre());
-        System.out.println("Estudiantes: " + curso.getEstudiantes().tamaño());
-        System.out.println("Actividades: " + curso.getActividades().tamaño());
-        System.out.println("Cálculos: " + curso.getCalculos().tamaño());
-        mostrarCalculos(curso);
+        System.out.println("Semestre 1 cargado: " + cursoS1.getNombre());
+        System.out.println("Estudiantes: " + cursoS1.getEstudiantes().tamaño());
+        System.out.println("Actividades: " + cursoS1.getActividades().tamaño());
+        System.out.println("Cálculos: " + cursoS1.getCalculos().tamaño());
+        mostrarCalculos(cursoS1);
         System.out.println();
         
-        // ejecutar cálculos
+        // Ejecutar cálculos del semestre 1
         System.out.println("========== EJECUTANDO CÁLCULOS ==========");
-        ejecutarTodosLosCalculos(curso);
+        ejecutarTodosLosCalculos(cursoS1);
         System.out.println();
         
-        // actividades vencidas
+        // Consultas del semestre 1
         System.out.println("========== CONSULTA 1: ACTIVIDADES VENCIDAS ==========");
         System.out.println("Fecha actual: 2024-02-13");
-        ListaCompuesta<Actividad> actividadesVencidas = ConsultasAvanzadas.obtenerActividadesVencidas(curso, "2024-02-13");
+        ListaCompuesta<Actividad> actividadesVencidas = ConsultasAvanzadas.obtenerActividadesVencidas(cursoS1, "2024-02-13");
         mostrarActividadesVencidas(actividadesVencidas);
         System.out.println();
         
         System.out.println("========== CONSULTA 2: ACTIVIDADES CON ENTREGAS INCOMPLETAS ==========");
-        ListaCompuesta<Actividad> actividadesIncompletas = ConsultasAvanzadas.obtenerActividadesConEntregasIncompletas(curso);
+        ListaCompuesta<Actividad> actividadesIncompletas = ConsultasAvanzadas.obtenerActividadesConEntregasIncompletas(cursoS1);
         mostrarActividadesIncompletas(actividadesIncompletas);
+        System.out.println("NOTA: Gustavo Mejia (CARP06) no entregó Proyecto");
+        System.out.println("NOTA: Santino Gonzalez (CARP08) no entregó Examen1");
         System.out.println();
         
         System.out.println("========== CONSULTA 3: ESTUDIANTES CON ENTREGAS ALTAS ==========");
-        ListaCompuesta<Estudiante> estudiantesEntregasAltas = ConsultasAvanzadas.obtenerEstudiantesConEntregasAltas(curso, 50.0);
+        ListaCompuesta<Estudiante> estudiantesEntregasAltas = ConsultasAvanzadas.obtenerEstudiantesConEntregasAltas(cursoS1, 50.0);
         mostrarEstudiantes(estudiantesEntregasAltas);
         System.out.println();
         
         System.out.println("========== CONSULTA 4: ESTUDIANTES CON NOTAS REPETIDAS ==========");
-        ListaCompuesta<Estudiante> estudiantesNotasRepetidas = ConsultasAvanzadas.obtenerEstudiantesConNotasRepetidas(curso);
+        ListaCompuesta<Estudiante> estudiantesNotasRepetidas = ConsultasAvanzadas.obtenerEstudiantesConNotasRepetidas(cursoS1);
         mostrarEstudiantes(estudiantesNotasRepetidas);
         System.out.println();
         
         System.out.println("========== CONSULTA 5: CÁLCULOS INCOMPLETOS ==========");
-        ListaCompuesta<Calculo> calculosIncompletos = ConsultasAvanzadas.obtenerCalculosIncompletos(curso);
+        ListaCompuesta<Calculo> calculosIncompletos = ConsultasAvanzadas.obtenerCalculosIncompletos(cursoS1);
         mostrarCalculosList(calculosIncompletos);
         System.out.println();
         
-        // generar reporte
+        // Generar reporte del semestre 1
         System.out.println("========== GENERANDO REPORTE ==========");
-        generarReporte(curso);
+        generarReporte(cursoS1);
         System.out.println();
         
         // Operaciones con ListaCompuesta
-        mostrarOperaciones(curso);
+        mostrarOperaciones(cursoS1);
+        System.out.println();
+        
+        // Cargar Semestre 2
+        Curso cursoS2 = CargadorDatos.cargarCurso(
+            "Estructura de Datos - Semestre 2",
+            "CARP912",
+            3.0,
+            "Dr. Xavier Barriga",
+            4,
+            "estudiantes_s2.csv",
+            "actividades_s2.csv",
+            "entregas_s2.csv",
+            "calculos_s2.csv"
+        );
+        
+        // Ejecutar cálculos del semestre 2
+        System.out.println("Curso cargado: " + cursoS2.getNombre());
+        System.out.println("Estudiantes: " + cursoS2.getEstudiantes().tamaño());
+        System.out.println();
+        
+        System.out.println("========== EJECUTANDO CÁLCULOS SEMESTRE 2 ==========");
+        ejecutarTodosLosCalculos(cursoS2);
+        System.out.println();
+        
+        // Generar reporte del semestre 2
+        System.out.println("========== GENERANDO REPORTE SEMESTRE 2 ==========");
+        generarReporte(cursoS2);
+        System.out.println();
+        
+        // Reporte combinado de ambos semestres
+        System.out.println("========== REPORTE COMBINADO - AMBOS SEMESTRES ==========");
+        generarReporteCombinado(cursoS1, cursoS2);
+        System.out.println();
         
         System.out.println("========== FIN DEL PROGRAMA ==========");
+    }
+    
+    private static void generarReporteCombinado(Curso cursoS1, Curso cursoS2) {
+        System.out.println();
+        
+        // Iterar sobre estudiantes
+        for (int i = 0; i < cursoS1.getEstudiantes().tamaño(); i++) {
+            Estudiante estS1 = cursoS1.getEstudiantes().obtener(i);
+            Estudiante estS2 = cursoS2.getEstudiantes().obtener(i);
+            
+            if (estS1 != null && estS2 != null) {
+                System.out.println("\n  Estudiante: " + estS1.getNombre() + " (" + estS1.getCodigo() + ")");
+                
+                // Obtener promedios de ambos semestres
+                Fraccion promedioS1 = null;
+                Fraccion promedioS2 = null;
+                
+                for (int j = 0; j < cursoS1.getCalculos().tamaño(); j++) {
+                    Calculo calc = cursoS1.getCalculos().obtener(j);
+                    if (calc != null && calc.getTipo().equals("promedio")) {
+                        promedioS1 = EjecutorCalculos.ejecutarCalculo(calc, estS1);
+                        break;
+                    }
+                }
+                
+                for (int j = 0; j < cursoS2.getCalculos().tamaño(); j++) {
+                    Calculo calc = cursoS2.getCalculos().obtener(j);
+                    if (calc != null && calc.getTipo().equals("promedio")) {
+                        promedioS2 = EjecutorCalculos.ejecutarCalculo(calc, estS2);
+                        break;
+                    }
+                }
+                
+                if (promedioS1 != null && promedioS2 != null) {
+                    System.out.println("    Semestre 1: " + promedioS1.toString());
+                    System.out.println("    Semestre 2: " + promedioS2.toString());
+                    
+                    // Calcular suma ponderada final (promedio de ambos semestres)
+                    double promedioFinal = (promedioS1.aDecimal() + promedioS2.aDecimal()) / 2;
+                    int numerador = (int) Math.round(promedioFinal * 10);
+                    Fraccion sumaPonderadaFinal = new Fraccion(numerador, 10, false);
+                    
+                    System.out.println("    Suma Ponderada Final: " + sumaPonderadaFinal.toString());
+                }
+            }
+        }
     }
     
     private static void mostrarOperaciones(Curso curso) {

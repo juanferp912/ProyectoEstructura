@@ -4,7 +4,7 @@ public class Main {
         
         Curso curso = CargadorDatos.cargarCurso(
             "Estructura de Datos",
-            "EST001",
+            "CARP912",
             3.0,
             "Dr. Xavier Barriga",
             4,
